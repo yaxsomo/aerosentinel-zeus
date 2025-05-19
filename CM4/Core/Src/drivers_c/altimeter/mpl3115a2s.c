@@ -21,12 +21,9 @@
  * @return uint8_t 0 if OK, 1 if error
  */
 static inline uint8_t I2C_WriteRegister(uint8_t dev, uint8_t reg, uint8_t data) {
-    uint8_t buf[2] = {reg, data};
-    if (HAL_I2C_Master_Transmit(&hi2c2, dev << 1, buf, 2, I2C2_TIMEOUT) != HAL_OK) {
-        return 1;
-    }
-    return 0;
+    return HAL_I2C_Mem_Write(&hi2c2, dev << 1, reg, I2C_MEMADD_SIZE_8BIT, &data, 1, I2C2_TIMEOUT) != HAL_OK;
 }
+
 
 /**
  * @brief Read registers starting from a register address using HAL
@@ -38,14 +35,9 @@ static inline uint8_t I2C_WriteRegister(uint8_t dev, uint8_t reg, uint8_t data) 
  * @return uint8_t 0 if OK, 1 if error
  */
 static inline uint8_t I2C_ReadRegisters(uint8_t dev, uint8_t reg, uint8_t* dest, uint8_t len) {
-    if (HAL_I2C_Master_Transmit(&hi2c2, dev << 1, &reg, 1, I2C2_TIMEOUT) != HAL_OK) {
-        return 1;
-    }
-    if (HAL_I2C_Master_Receive(&hi2c2, dev << 1, dest, len, I2C2_TIMEOUT) != HAL_OK) {
-        return 1;
-    }
-    return 0;
+    return HAL_I2C_Mem_Read(&hi2c2, dev << 1, reg, I2C_MEMADD_SIZE_8BIT, dest, len, I2C2_TIMEOUT) != HAL_OK;
 }
+
 
 /* Helpers -------------------------------------------------------------------*/
 static uint8_t DecodeConfiguration(MPL3115A2S_Config* config) {

@@ -38,7 +38,7 @@ extern "C" {
 extern I2C_HandleTypeDef hi2c2;
 
 /* Macros and Constants ------------------------------------------------------*/
-#define MPL3115A2S_ADDR (0xC0) // 8-bit write address for MPL3115A2S
+#define MPL3115A2S_ADDR (0x60) // 7-bit I2C address
 
 // Registers
 #define MPL3115A2S_STATUS (0x00) // Status Register

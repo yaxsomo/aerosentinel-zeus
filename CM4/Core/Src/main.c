@@ -98,6 +98,21 @@ int _write(int file, char *ptr, int len){
 	}
 	return len;
 }
+
+void I2C2_ScanBus(void)
+{
+    printf("Scanning I2C2 bus...\r\n");
+
+    for (uint8_t addr = 1; addr < 128; addr++)
+    {
+        if (HAL_I2C_IsDeviceReady(&hi2c2, (addr << 1), 2, 10) == HAL_OK)
+        {
+            printf(">> Found device at 0x%02X\r\n", addr);
+        }
+    }
+
+    printf("Scan complete.\r\n");
+}
 /* USER CODE END 0 */
 
 /**
@@ -160,6 +175,8 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   printf("Aerosentinel Zeus Core AI - Welcome! \n");
+
+  //I2C2_ScanBus();  // Scan once on boot
 
 	HAL_Delay(3000); // Minimum delay to let the module power up correctly
 	Zeus_Status ret = NAV_MAIN(); // Launching the Navigation Computer Main Handling Function
@@ -681,9 +698,9 @@ static void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 1 */
   htim5.Instance = TIM5;
-  htim5.Init.Prescaler = 0;
+  htim5.Init.Prescaler = 239;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim5.Init.Period = 4294967295;
+  htim5.Init.Period = 369;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_PWM_Init(&htim5) != HAL_OK)
@@ -697,7 +714,7 @@ static void MX_TIM5_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
+  sConfigOC.Pulse = 184;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)

@@ -9,7 +9,8 @@
 #include "manager/manager.h"
 #include "drivers_h/rgb_led/rgb_led.h"
 #include "global/configuration.h"
-
+#include "drivers_h/buzzer/buzzer.h"
+#include "sensors_hubs/redundancy_sensors.h"
 //Native C Libraries Includes
 #include <stdbool.h>
 #include <stdio.h>
@@ -30,6 +31,16 @@ bool Is_USB_Mode(){
 	return false;
 }
 
+
+
+void passive_peripherals_init(){
+	// Passive Peripherals Initialization
+	RGB_LED_Init(); // Start PWM on RGB channels
+	BUZZER_Init();
+}
+
+
+
 /**
   * @brief  Control Center Main Function
   *
@@ -37,8 +48,11 @@ bool Is_USB_Mode(){
   *
   */
 Zeus_Status NAV_MAIN(){
-	// Essential Peripherals Initialization
-	RGB_LED_Init(); // Start PWM on RGB channels
+	passive_peripherals_init();
+    BUZZER_Beep(1000); // short beep
+    HAL_Delay(900);
+
+    RedundantSensors_Init();
 
 	  // Checks if the USB Mode is active
 	  if (Is_USB_Mode())
@@ -79,6 +93,24 @@ Zeus_Status NAV_MAIN(){
 //			return BLACKBOX_ERROR;
 //		}
 
+	    while (1)
+	    {
+	        RedundantSensors_Update();
+	        RedundantSensorData data = RedundantSensors_GetData();
+
+	        if (data.altimeter.ok)
+	        {
+	            printf("Altitude: %.2f m | Temperature: %.2f °C\r\n",
+	                   data.altimeter.altitude,
+	                   data.altimeter.temperature);
+	        }
+	        else
+	        {
+	            printf("MPL3115A2S not responding!\r\n");
+	        }
+
+	        HAL_Delay(1000);
+	    }
 
 
 
