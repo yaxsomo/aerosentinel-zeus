@@ -59,6 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SPI5_NSS_CONFMEM_Pin GPIO_PIN_10
+#define SPI5_NSS_CONFMEM_GPIO_Port GPIOF
 #define LED1_Pin GPIO_PIN_0
 #define LED1_GPIO_Port GPIOC
 #define LED2_Pin GPIO_PIN_1
@@ -69,6 +71,8 @@ void Error_Handler(void);
 #define LED4_GPIO_Port GPIOC
 #define BUZZER_Pin GPIO_PIN_0
 #define BUZZER_GPIO_Port GPIOA
+#define SPI2_NSS_Pin GPIO_PIN_12
+#define SPI2_NSS_GPIO_Port GPIOB
 #define RED_Pin GPIO_PIN_12
 #define RED_GPIO_Port GPIOD
 #define GREEN_Pin GPIO_PIN_13
@@ -81,6 +85,8 @@ void Error_Handler(void);
 #define ECHO_TX_GPIO_Port GPIOC
 #define ECHO_RX_Pin GPIO_PIN_7
 #define ECHO_RX_GPIO_Port GPIOC
+#define SPI1_NSS_Pin GPIO_PIN_10
+#define SPI1_NSS_GPIO_Port GPIOG
 #define ECHO_NSS_Pin GPIO_PIN_13
 #define ECHO_NSS_GPIO_Port GPIOG
 

@@ -200,6 +200,26 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usb.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/h3lis331dl.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/Components/h3lis331dl/h3lis331dl.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/h3lis331dl_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/Components/h3lis331dl/h3lis331dl_reg.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/lsm6dsox.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/Components/lsm6dsox/lsm6dsox.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/lsm6dsox_reg.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Drivers/BSP/Components/lsm6dsox/lsm6dsox_reg.c</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/ST/STM32_USB_Device_Library/usbd_core.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</locationURI>

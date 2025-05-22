@@ -11,6 +11,13 @@
 
 #include "stm32h7xx_hal.h"
 
+#include "drivers_h/altimeter/mpl3115a2s.h"
+#include "h3lis331dl.h"
+//#include "drivers_h/high_g_accelerometer/h3lis331dltr.h"
+//#include "drivers_h/imu_embedded_ai/lsm6dso.h"
+
+
+
 // === Altimeter Data ===
 typedef struct {
     float altitude;
@@ -18,13 +25,6 @@ typedef struct {
     uint8_t ok;
 } MPL3115A2S_Data;
 
-// === High-G Accelerometer (H3LIS331DLTR) ===
-typedef struct {
-    float x_g;
-    float y_g;
-    float z_g;
-    uint8_t ok;
-} H3LIS331DLTR_Data;
 
 // === IMU with AI (LSM6DSOXTR) ===
 typedef struct {
@@ -41,7 +41,7 @@ typedef struct {
 // === Global Redundant Sensor State ===
 typedef struct {
     MPL3115A2S_Data altimeter;
-    H3LIS331DLTR_Data high_g_acc;
+//    H3LIS331DL_Data high_g_acc;
     LSM6DSOXTR_Data imu;
 } RedundantSensorData;
 
@@ -49,5 +49,7 @@ typedef struct {
 void RedundantSensors_Init(void);
 void RedundantSensors_Update(void);
 RedundantSensorData RedundantSensors_GetData(void);
+
+extern RedundantSensorData sensor_data;
 
 #endif /* INC_SENSORS_HUBS_REDUNDANCY_SENSORS_H_ */
